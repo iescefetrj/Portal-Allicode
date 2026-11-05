@@ -121,6 +121,7 @@ Portal-Allicode/
 ├── backend/                  # back-end (API em NestJS)
 │   ├── src/                  # código-fonte
 │   ├── test/                 # testes de ponta a ponta (e2e)
+│   ├── .env.example          # modelo das variáveis de ambiente
 │   ├── Dockerfile
 │   └── package.json
 ├── frontend/                 # front-end (site em React + Vite)

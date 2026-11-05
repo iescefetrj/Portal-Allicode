@@ -31,6 +31,14 @@ O passo a passo completo, para cada sistema operacional, está no [README da rai
 | --- | --- | --- |
 | `PORT` | `3000` | Porta em que a API escuta |
 
-Ainda não há arquivo `.env.example` nesta pasta.
+As variáveis são carregadas pelo `@nestjs/config` e podem vir do ambiente do processo ou de um arquivo `.env` nesta pasta. Se a mesma variável estiver nos dois, vale a do ambiente. O `.env` é opcional: sem ele, valem os padrões da tabela. Para criar o seu, copie o modelo com `cp .env.example .env` (no PowerShell, `copy .env.example .env`). O `.env` não é versionado.
+
+Para ler uma variável no código, injete o `ConfigService`, que está disponível em todos os módulos:
+
+```ts
+constructor(private readonly configService: ConfigService) {}
+
+const port = this.configService.get<number>('PORT', 3000);
+```
 
 Voltar para o [README da raiz](../README.md).
