@@ -1,0 +1,20 @@
+# Dependências e artefatos de build são gerados dentro da imagem
+node_modules
+dist
+coverage
+*.tsbuildinfo
+*.log
+
+# Testes não fazem parte da imagem
+test
+
+# Controle de versão
+.git
+
+# Variáveis de ambiente nunca entram na imagem
+.env
+.env.*
+
+# Arquivos do próprio Docker
+Dockerfile
+.dockerignore
