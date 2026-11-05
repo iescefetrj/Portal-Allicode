@@ -1,0 +1,20 @@
+# Imagens finais de PRODUÇÃO (sem bind mounts), para testar localmente.
+# Uso: docker compose -f docker-compose.prod.yml up --build
+services:
+  front:
+    build:
+      context: ./frontend
+      target: production
+      args:
+        # Embutida no bundle em tempo de build; o navegador acessa o back por localhost
+        - VITE_API_URL=${VITE_API_URL:-http://localhost:3000}
+    ports:
+      - "8080:80"
+
+  back:
+    build:
+      context: ./backend
+      target: production
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
