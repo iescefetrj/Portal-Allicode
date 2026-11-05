@@ -1,0 +1,35 @@
+# Ambiente de DESENVOLVIMENTO com hot reload.
+# Uso: docker compose up --build
+services:
+  front:
+    build:
+      context: ./frontend
+      target: development
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      # Volume anônimo: impede que o node_modules do host sobrescreva o do container
+      - /app/node_modules
+    environment:
+      # Polling para o watcher do Vite detectar mudanças no bind mount
+      - CHOKIDAR_USEPOLLING=true
+      # Quem chama a API é o navegador (no host), não o container do front.
+      # Por isso a URL usa a porta publicada em localhost, e não o nome do serviço (http://back:3000).
+      - VITE_API_URL=${VITE_API_URL:-http://localhost:3000}
+
+  back:
+    build:
+      context: ./backend
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      # Volume anônimo: impede que o node_modules do host sobrescreva o do container
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      # Faz o watch do compilador TypeScript (usado pelo nest start --watch) usar polling
+      - TSC_WATCHFILE=DynamicPriorityPolling
+      - TSC_WATCHDIRECTORY=DynamicPriorityPolling

@@ -1,0 +1,17 @@
+# Dependências e artefatos de build são gerados dentro da imagem
+node_modules
+dist
+coverage
+*.log
+
+# Controle de versão
+.git
+
+# Variáveis de ambiente nunca entram na imagem (exceto o exemplo)
+.env
+.env.*
+!.env.example
+
+# Arquivos do próprio Docker
+Dockerfile
+.dockerignore
