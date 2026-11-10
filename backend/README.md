@@ -11,6 +11,14 @@ Hoje é o projeto NestJS inicial: só responde "Hello World!" em `GET /`. O banc
 
 O passo a passo completo, para cada sistema operacional, está no [README da raiz](../README.md#como-rodar-o-projeto-localmente).
 
+## Validação e documentação da API
+
+A documentação Swagger fica em http://localhost:3000/docs e o documento OpenAPI em http://localhost:3000/docs-json (ajuste a porta se necessário).
+
+O `ValidationPipe` global usa `class-validator` e `class-transformer`: transforma os dados recebidos em instâncias de DTOs e responde com `400 Bad Request` quando a validação falha ou há campos sem decorators de validação. Use classes concretas como DTOs e importe-as como valores, pois interfaces e imports `type` não existem em tempo de execução.
+
+Nos DTOs, declare regras como `@IsString()` e `@IsEmail()`. Para conversões de campos numéricos, use `@Type(() => Number)` do `class-transformer`; a conversão implícita de propriedades não está habilitada. Documente os campos com `@ApiProperty()` ou `@ApiPropertyOptional()` do `@nestjs/swagger` e as operações com os decorators Swagger nos controllers.
+
 ## Scripts
 
 | Comando | O que faz |
