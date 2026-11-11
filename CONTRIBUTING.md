@@ -96,6 +96,8 @@ Quando a `develop` estiver pronta, é criada uma release (uma versão do projeto
 
 ## Checklist do Pull Request
 
+O workflow [Routine checks](.github/workflows/ci.yml) executa lint, conferência de formatação e build no front-end e no back-end, além dos testes unitários e de ponta a ponta do back-end. Ele roda em pull requests e pushes para `develop` e `main`. Também pode ser iniciado manualmente pela aba **Actions**, em **Routine checks → Run workflow**. Usa Node.js 26, como os Dockerfiles, e instala as versões dos arquivos `package-lock.json` com `npm ci`.
+
 Antes de pedir revisão, confira:
 
 - [ ] Nas pastas que você alterou (`frontend/` e/ou `backend/`), estes comandos passam sem erro:
